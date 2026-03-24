@@ -11,6 +11,11 @@
       "sourceType": "github",
       "computedHash": "0facdb5c491a654e3b0f6d300fb8fa14472d811cb715c632dc2862919b277dae"
     },
+    "ffmpeg": {
+      "source": "digitalsamba/claude-code-video-toolkit",
+      "sourceType": "github",
+      "computedHash": "51fa05bc18bb2691e622aefd1d8ec6d4d96a9e9c44cdf599003c9d6003d11a07"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
