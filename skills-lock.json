@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "skills": {
+    "ai-image-generation": {
+      "source": "inferen-sh/skills",
+      "sourceType": "github",
+      "computedHash": "e45c0ee94791e67e355130109fd827bd8b4bd0fb1d6b2ff8f782eb566d435174"
+    },
+    "changelog-generator": {
+      "source": "ComposioHQ/awesome-claude-skills",
+      "sourceType": "github",
+      "computedHash": "0facdb5c491a654e3b0f6d300fb8fa14472d811cb715c632dc2862919b277dae"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "computedHash": "d31e234f0c90694a670222cdd1dafa853e051d7066beda389f1097c22dadd461"
+    },
+    "git-commit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "2607fc60629b82b257136dd2a7a373f0a4466c0b49df7746d845d59313c99b21"
+    },
+    "videoagent-video-studio": {
+      "source": "pexoai/pexo-skills",
+      "sourceType": "github",
+      "computedHash": "6b680136146f3776e5706a066440432456b2dcf27e674ac6650aedc00ceca940"
+    }
+  }
+}
