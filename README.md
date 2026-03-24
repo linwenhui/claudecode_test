@@ -1,92 +1,172 @@
-# ClaudeCode_Test
+# ClaudeCode 个人技能库
 
+个人 Claude Code 技能集合，用于增强 AI 辅助编程能力。
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## 技能目录结构
 
 ```
-cd existing_repo
-git remote add origin https://assets.yealink.com/yl1117/claudecode_test.git
-git branch -M main
-git push -uf origin main
+.
+├── .skills/            # 技能主目录（按分类组织）
+│   ├── core/           # 核心技能 - 高频使用
+│   │   ├── claude-api/
+│   │   ├── frontend-design/
+│   │   └── skill-creator/
+│   ├── document/       # 文档处理
+│   │   ├── pdf/
+│   │   ├── docx/
+│   │   └── xlsx/
+│   ├── media/          # 媒体生成
+│   │   ├── ai-image-generation/
+│   │   ├── videoagent-video-studio/
+│   │   └── ffmpeg/
+│   ├── testing/        # 测试相关
+│   │   ├── mcp-builder/
+│   │   └── webapp-testing/
+│   └── utility/        # 工具类
+│       ├── git-commit/
+│       ├── changelog-generator/
+│       ├── web-scraping/
+│       └── find-skills/
+│
+└── .claude/skills/     # 符号链接指向 .skills/ (Claude Code 读取)
 ```
 
-## Integrate with your tools
+## 技能列表
 
-- [ ] [Set up project integrations](https://assets.yealink.com/yl1117/claudecode_test/-/settings/integrations)
+### Core (核心技能)
 
-## Collaborate with your team
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `claude-api` | 使用 Anthropic SDK/API | 构建 Claude API 应用，支持多模型路由 |
+| `frontend-design` | 构建 Web 界面 | 创建高质量前端界面，避免通用 AI 美学 |
+| `skill-creator` | 创建新技能 | 技能开发辅助工具 |
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### Document (文档处理)
 
-## Test and Deploy
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `pdf` | 处理 PDF 文件 | 读取、合并、拆分、OCR PDF |
+| `docx` | 处理 Word 文档 | 创建、编辑 Word 文档 |
+| `xlsx` | 处理 Excel 表格 | 创建、编辑 .xlsx/.csv 文件 |
 
-Use the built-in continuous integration in GitLab.
+### Media (媒体生成)
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `ai-image-generation` | 生成 AI 图像 | FLUX/Gemini/Grok 等 50+ 模型 |
+| `videoagent-video-studio` | 生成 AI 视频 | 文本/图像转视频，支持 7+ 后端 |
+| `ffmpeg` | 音视频处理 | 格式转换、压缩、音频提取 |
 
-***
+### Testing (测试相关)
 
-# Editing this README
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `mcp-builder` | 构建 MCP 服务器 | 创建外部服务集成工具 |
+| `webapp-testing` | 测试前端功能 | Playwright 自动化测试 |
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### Utility (工具类)
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `git-commit` | Git 提交代码 | Conventional Commits 规范提交 |
+| `changelog-generator` | 生成变更日志 | Git 提交 → 用户友好日志 |
+| `web-scraping` | 爬取网页内容 | 级联爬取策略，反爬绕过 |
+| `find-skills` | 查找新技能 | 发现并安装社区技能 |
 
-## Name
-Choose a self-explaining name for your project.
+## 使用指南
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### 技能触发方式
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+技能通过以下任一方式触发:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+1. **自动触发** - 当检测到相关代码模式时
+   - 例：导入 `anthropic` 模块 → 触发 `claude-api` 技能
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+2. **手动触发** - 通过技能命令
+   ```
+   /skill <skill-name>
+   ```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+3. **上下文触发** - 用户请求中提及相关功能
+   - 例："生成一张图片" → 触发 `ai-image-generation`
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### 技能使用示例
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+**AI 图像生成**:
+```bash
+# 使用 FLUX 生成图片
+infsh app run falai/flux-dev-lora --input '{"prompt": "a cat astronaut"}'
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+**AI 视频生成**:
+```bash
+# 文本转视频
+node tools/generate.js --mode text-to-video --prompt "cat walking in rain" --duration 5
+```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+**Git 提交**:
+```bash
+# 自动分析变更并生成规范提交
+git commit -m "feat: add user authentication"
+```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## 环境配置
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### 必需配置
+
+| 变量 | 说明 |
+|-----|------|
+| `INFERENCE_SH_TOKEN` | inference.sh API Token (图像/视频生成) |
+
+### 可选配置
+
+| 变量 | 说明 |
+|-----|------|
+| `VIDEO_STUDIO_PROXY_URL` | 视频代理 URL |
+| `VIDEO_STUDIO_TOKEN` | 视频代理 Token |
+
+## 添加新技能
+
+1. 在 `.claude/skills/` 或 `.agents/skills/` 创建技能目录
+2. 添加 `SKILL.md` 定义技能元数据和指南
+3. (可选) 添加 `references/` 和 `tools/` 子目录
+
+技能模板结构:
+```markdown
+---
+name: skill-name
+description: 技能描述
+tags: [tag1, tag2]
+---
+
+# Skill Name
+
+## 使用场景
+## 快速开始
+## 示例
+```
+
+## 技能管理
+
+### 查看已安装技能
+```bash
+# 列出所有技能
+find . -name "SKILL.md" -exec dirname {} \;
+```
+
+### 技能更新
+```bash
+# 拉取最新技能 (如从远程仓库)
+git pull origin main
+```
+
+## 项目状态
+
+- ✅ 核心文档技能已配置 (PDF/DOCX/XLSX)
+- ✅ 媒体生成技能已配置 (图片/视频)
+- ✅ 开发辅助技能已配置 (Git/MCP/Testing)
+- 🔄 持续添加新技能...
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+各技能使用独立的许可条款，详见各技能目录下的 `LICENSE.txt` 或 `SKILL.md`。

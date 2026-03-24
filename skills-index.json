@@ -1,0 +1,197 @@
+{
+  "owner": "linwh",
+  "description": "个人 Claude Code 技能库 - 技能索引",
+  "lastUpdated": "2026-03-24",
+  "categories": {
+    "core": {
+      "name": "核心技能",
+      "description": "高频使用的基础技能",
+      "skills": ["claude-api", "frontend-design", "skill-creator"]
+    },
+    "document": {
+      "name": "文档处理",
+      "description": "PDF/Word/Excel 文档处理",
+      "skills": ["pdf", "docx", "xlsx"]
+    },
+    "media": {
+      "name": "媒体生成",
+      "description": "AI 图像/视频生成",
+      "skills": ["ai-image-generation", "videoagent-video-studio"]
+    },
+    "testing": {
+      "name": "测试相关",
+      "description": "Web 测试和 MCP 构建",
+      "skills": ["webapp-testing", "mcp-builder"]
+    },
+    "utility": {
+      "name": "工具类",
+      "description": "Git/爬虫/日志等辅助工具",
+      "skills": ["git-commit", "changelog-generator", "web-scraping", "find-skills"]
+    }
+  },
+  "skills": [
+    {
+      "name": "claude-api",
+      "path": ".skills/core/claude-api",
+      "category": "core",
+      "tags": ["api", "anthropic", "llm", "core"],
+      "triggers": ["anthropic", "@anthropic-ai/sdk", "claude_agent_sdk"],
+      "description": "Build apps with the Claude API or Anthropic SDK",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "默认使用 claude-opus-4-6 模型"
+    },
+    {
+      "name": "frontend-design",
+      "path": ".skills/core/frontend-design",
+      "category": "core",
+      "tags": ["frontend", "ui", "design", "react", "css"],
+      "triggers": ["website", "landing page", "dashboard", "component", "React"],
+      "description": "Create distinctive, production-grade frontend interfaces",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "强调 bold maximalism，避免通用 AI 美学"
+    },
+    {
+      "name": "pdf",
+      "path": ".skills/document/pdf",
+      "category": "document",
+      "tags": ["pdf", "document", "ocr", "merge", "split"],
+      "triggers": [".pdf", "PDF 文件", "合并 PDF", "拆分 PDF"],
+      "description": "PDF 文件处理 - 读取、合并、拆分、OCR",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "使用 pypdf 和 pdfplumber"
+    },
+    {
+      "name": "docx",
+      "path": ".skills/document/docx",
+      "category": "document",
+      "tags": ["word", "docx", "document"],
+      "triggers": [".docx", "Word 文档"],
+      "description": "Word 文档处理 - 创建、编辑",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    },
+    {
+      "name": "xlsx",
+      "path": ".skills/document/xlsx",
+      "category": "document",
+      "tags": ["excel", "spreadsheet", "csv", "xlsx"],
+      "triggers": [".xlsx", ".csv", "Excel", "表格"],
+      "description": "Excel 表格处理 - 创建、编辑",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    },
+    {
+      "name": "mcp-builder",
+      "path": ".skills/testing/mcp-builder",
+      "category": "testing",
+      "tags": ["mcp", "tool", "integration", "api"],
+      "triggers": ["MCP", "Model Context Protocol", "external service"],
+      "description": "Guide for creating high-quality MCP servers",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    },
+    {
+      "name": "webapp-testing",
+      "path": ".skills/testing/webapp-testing",
+      "category": "testing",
+      "tags": ["testing", "playwright", "automation", "e2e"],
+      "triggers": ["test", "Playwright", "screenshot", "browser"],
+      "description": "Automate testing of local web applications using Playwright",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    },
+    {
+      "name": "skill-creator",
+      "path": ".skills/core/skill-creator",
+      "category": "core",
+      "tags": ["skill", "creator", "template"],
+      "triggers": ["create skill", "new skill", "skill template"],
+      "description": "Skill creation and management",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    },
+    {
+      "name": "ai-image-generation",
+      "path": ".skills/media/ai-image-generation",
+      "category": "media",
+      "tags": ["image", "ai", "flux", "gemini", "grok", "seedream"],
+      "triggers": ["image generation", "ai image", "text to image", "flux", "generate image"],
+      "description": "Generate AI images with FLUX, Gemini, Grok, Seedream and 50+ models",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "需要 inference.sh CLI (infsh)"
+    },
+    {
+      "name": "videoagent-video-studio",
+      "path": ".skills/media/videoagent-video-studio",
+      "category": "media",
+      "tags": ["video", "ai", "text-to-video", "image-to-video", "veo", "kling"],
+      "triggers": ["video", "create video", "animate", "text to video"],
+      "description": "Generate short AI videos from text or images",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "支持 7 个后端：minimax, kling, veo, hunyuan, grok, seedance, pixverse"
+    },
+    {
+      "name": "web-scraping",
+      "path": ".skills/utility/web-scraping",
+      "category": "utility",
+      "tags": ["scraping", "crawler", "extraction", "playwright"],
+      "triggers": ["scrape", "crawl", "extract content", "fetch webpage"],
+      "description": "Web scraping with anti-bot bypass and content extraction",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "级联策略：trafilatura → requests → Playwright"
+    },
+    {
+      "name": "git-commit",
+      "path": ".skills/utility/git-commit",
+      "category": "utility",
+      "tags": ["git", "commit", "conventional-commits"],
+      "triggers": ["commit", "git commit", "/commit"],
+      "description": "Execute git commit with Conventional Commits specification",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "自动分析 diff 生成提交消息"
+    },
+    {
+      "name": "changelog-generator",
+      "path": ".skills/utility/changelog-generator",
+      "category": "utility",
+      "tags": ["changelog", "git", "release-notes"],
+      "triggers": ["changelog", "release notes", "change log"],
+      "description": "Automatically create user-facing changelogs from git commits",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    },
+    {
+      "name": "find-skills",
+      "path": ".skills/utility/find-skills",
+      "category": "utility",
+      "tags": ["discover", "search", "install"],
+      "triggers": ["find skill", "search skill", "is there a skill"],
+      "description": "Discover and install agent skills",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": ""
+    }
+  ],
+  "quickCommands": {
+    "/skill api": "claude-api - API/SDK 开发",
+    "/skill ui": "frontend-design - 前端界面",
+    "/skill doc": "pdf/docx/xlsx - 文档处理",
+    "/skill video": "videoagent - 视频生成",
+    "/skill image": "ai-image-generation - 图像生成",
+    "/skill test": "webapp-testing - Web 测试",
+    "/skill git": "git-commit - Git 提交"
+  }
+}
