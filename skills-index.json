@@ -1,7 +1,7 @@
 {
   "owner": "linwh",
   "description": "个人 Claude Code 技能库 - 技能索引",
-  "lastUpdated": "2026-03-24",
+  "lastUpdated": "2026-03-25",
   "categories": {
     "core": {
       "name": "核心技能",
@@ -16,7 +16,7 @@
     "media": {
       "name": "媒体生成",
       "description": "AI 图像/视频生成",
-      "skills": ["ai-image-generation", "videoagent-video-studio"]
+      "skills": ["ai-image-generation", "videoagent-video-studio", "ffmpeg"]
     },
     "testing": {
       "name": "测试相关",
@@ -26,7 +26,17 @@
     "utility": {
       "name": "工具类",
       "description": "Git/爬虫/日志等辅助工具",
-      "skills": ["git-commit", "changelog-generator", "web-scraping", "find-skills"]
+      "skills": ["git-commit", "changelog-generator", "web-scraping", "find-skills", "browser", "video-processor", "docx-format-replicator", "release-skills"]
+    },
+    "baoyu": {
+      "name": "宝玉技能",
+      "description": "翻译/Markdown 处理/YouTube 等工具",
+      "skills": ["baoyu-compress-image", "baoyu-format-markdown", "baoyu-markdown-to-html", "baoyu-translate", "baoyu-url-to-markdown", "baoyu-youtube-transcript", "baoyu-danger-gemini-web", "baoyu-danger-x-to-markdown"]
+    },
+    "social": {
+      "name": "社交媒体发布",
+      "description": "公众号/微博/X 发布工具",
+      "skills": ["baoyu-post-to-wechat", "baoyu-post-to-weibo", "baoyu-post-to-x", "wechat-article-writer"]
     }
   },
   "skills": [
@@ -183,15 +193,199 @@
       "usageCount": 0,
       "lastUsed": null,
       "notes": ""
+    },
+    {
+      "name": "browser",
+      "path": ".skills/utility/browser",
+      "category": "utility",
+      "tags": ["browser", "cdp", "chrome", "scraping", "automation"],
+      "triggers": ["browse website", "scrape page", "take screenshot", "automate browser", "extract DOM", "web scraping"],
+      "description": "Minimal Chrome DevTools Protocol tools for browser automation and scraping",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Start Chrome with --profile to use your authenticated session"
+    },
+    {
+      "name": "video-processor",
+      "path": ".skills/utility/video-processor",
+      "category": "utility",
+      "tags": ["video", "youtube", "ffmpeg", "whisper", "transcription", "audio"],
+      "triggers": ["YouTube download", "video conversion", "audio extraction", "transcription", "mp4", "webm", "ffmpeg", "yt-dlp", "whisper"],
+      "description": "Download and process videos from YouTube and other platforms. Supports video download, audio extraction, format conversion, and Whisper transcription",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Requires yt-dlp, ffmpeg, and whisper installed"
+    },
+    {
+      "name": "docx-format-replicator",
+      "path": ".skills/utility/docx-format-replicator",
+      "category": "utility",
+      "tags": ["word", "docx", "format", "template", "replicate"],
+      "triggers": ["replicate format", "copy format", "create template", "document template", "format consistency"],
+      "description": "Extract formatting from existing Word documents and generate new documents with the same format but different content",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Uses python-docx for extraction and generation"
+    },
+    {
+      "name": "release-skills",
+      "path": ".skills/utility/release-skills",
+      "category": "utility",
+      "tags": ["release", "version", "changelog", "publish", "git"],
+      "triggers": ["release", "发布", "new version", "bump version", "push", "推送"],
+      "description": "Universal release workflow. Auto-detects version files and changelogs. Supports Node.js, Python, Rust, Claude Plugin, and generic projects",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Generates multi-language changelogs (en/zh/ja/ko/de/fr/es)"
+    },
+    {
+      "name": "baoyu-compress-image",
+      "path": ".skills/baoyu/baoyu-compress-image",
+      "category": "baoyu",
+      "tags": ["image", "compress", "optimize", "webp", "png"],
+      "triggers": ["compress image", "optimize image", "convert to webp", "reduce image size"],
+      "description": "Compresses images to WebP (default) or PNG with automatic tool selection (sips → cwebp → ImageMagick → Sharp)",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Default quality: 80, default format: webp"
+    },
+    {
+      "name": "baoyu-format-markdown",
+      "path": ".skills/baoyu/baoyu-format-markdown",
+      "category": "baoyu",
+      "tags": ["markdown", "format", "beautify", "frontmatter", "title"],
+      "triggers": ["format markdown", "beautify article", "add formatting", "improve layout"],
+      "description": "Formats plain text or markdown files with frontmatter, titles, summaries, headings, bold, lists, and code blocks",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Outputs to {filename}-formatted.md, supports title generation formulas"
+    },
+    {
+      "name": "baoyu-markdown-to-html",
+      "path": ".skills/baoyu/baoyu-markdown-to-html",
+      "category": "baoyu",
+      "tags": ["markdown", "html", "converter", "wechat", "theme"],
+      "triggers": ["markdown to html", "convert md to html", "md 转 html", "微信外链转底部引用"],
+      "description": "Converts Markdown to styled HTML with WeChat-compatible themes. Supports code highlighting, math, PlantUML, footnotes, alerts, and bottom citations",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Themes: default, grace, simple, modern. Supports --cite for bottom citations"
+    },
+    {
+      "name": "baoyu-translate",
+      "path": ".skills/baoyu/baoyu-translate",
+      "category": "baoyu",
+      "tags": ["translate", "translation", "localization", "chinese", "english"],
+      "triggers": ["translate", "翻译", "精翻", "translate article", "translate to Chinese", "translate to English", "改成中文", "改成英文"],
+      "description": "Translates articles and documents between languages with three modes - quick, normal, and refined. Supports custom glossaries and terminology consistency",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Modes: quick (direct), normal (analyze+translate), refined (analyze+translate+review+polish)"
+    },
+    {
+      "name": "baoyu-url-to-markdown",
+      "path": ".skills/baoyu/baoyu-url-to-markdown",
+      "category": "baoyu",
+      "tags": ["url", "markdown", "scrape", "chrome", "cdp"],
+      "triggers": ["url to markdown", "fetch page", "save webpage", "网页转 markdown"],
+      "description": "Fetch any URL and convert to markdown using Chrome CDP. Supports auto-capture and wait-for-user modes, with Defuddle pipeline and YouTube transcript extraction",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Fallback: headless → headed → wait mode → defuddle.md API"
+    },
+    {
+      "name": "baoyu-youtube-transcript",
+      "path": ".skills/baoyu/baoyu-youtube-transcript",
+      "category": "baoyu",
+      "tags": ["youtube", "transcript", "subtitle", "caption", "cover"],
+      "triggers": ["YouTube transcript", "download subtitles", "get captions", "YouTube 字幕", "YouTube 封面", "video thumbnail"],
+      "description": "Downloads YouTube video transcripts/subtitles and cover images by URL or video ID. Supports multiple languages, translation, chapters, and speaker identification",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Uses InnerTube API with yt-dlp fallback. Caches raw data for fast re-formatting"
+    },
+    {
+      "name": "baoyu-danger-gemini-web",
+      "path": ".skills/baoyu/baoyu-danger-gemini-web",
+      "category": "baoyu",
+      "tags": ["gemini", "google", "image-generation", "text-generation", "vision"],
+      "triggers": ["gemini image", "gemini text", "generate image with gemini", "gemini web api"],
+      "description": "Generates images and text via reverse-engineered Gemini Web API. Supports text generation, image generation, reference images, and multi-turn conversations",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Requires user consent. Models: gemini-3-pro, gemini-3-flash, gemini-3-flash-thinking, gemini-3.1-pro-preview"
+    },
+    {
+      "name": "baoyu-danger-x-to-markdown",
+      "path": ".skills/baoyu/baoyu-danger-x-to-markdown",
+      "category": "baoyu",
+      "tags": ["x", "twitter", "tweet", "markdown", "archive"],
+      "triggers": ["x to markdown", "tweet to markdown", "save tweet", "x.com", "twitter.com"],
+      "description": "Converts X (Twitter) tweets and articles to markdown with YAML front matter. Uses reverse-engineered API requiring user consent",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Requires consent. Supports tweets/threads and X Articles"
+    },
+    {
+      "name": "baoyu-post-to-wechat",
+      "path": ".skills/social/baoyu-post-to-wechat",
+      "category": "social",
+      "tags": ["wechat", "official-account", "publish", "公众号", "api", "browser"],
+      "triggers": ["发布公众号", "post to wechat", "微信公众号", "贴图", "图文", "文章"],
+      "description": "Posts content to WeChat Official Account via API or Chrome CDP. Supports article posting (HTML/markdown/text) and image-text posts (图文)",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "API method: fast, requires credentials. Browser method: slow, requires login. Multi-account support"
+    },
+    {
+      "name": "baoyu-post-to-weibo",
+      "path": ".skills/social/baoyu-post-to-weibo",
+      "category": "social",
+      "tags": ["weibo", "微博", "publish", "headline", "article"],
+      "triggers": ["post to weibo", "发微博", "发布微博", "publish to weibo", "微博头条文章"],
+      "description": "Posts content to Weibo. Supports regular posts with text/images/videos, and headline articles (头条文章) with Markdown input via Chrome CDP",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Title: 32 chars max, Summary: 44 chars max. Uses real Chrome for anti-bot bypass"
+    },
+    {
+      "name": "baoyu-post-to-x",
+      "path": ".skills/social/baoyu-post-to-x",
+      "category": "social",
+      "tags": ["x", "twitter", "tweet", "publish", "article"],
+      "triggers": ["post to x", "tweet", "publish to twitter", "share on x"],
+      "description": "Posts content and articles to X (Twitter). Supports regular posts with images/videos and X Articles (long-form Markdown) via Chrome CDP",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Regular posts: up to 10,000 chars (Premium). Articles: requires X Premium"
+    },
+    {
+      "name": "wechat-article-writer",
+      "path": ".skills/social/wechat-article-writer",
+      "category": "social",
+      "tags": ["wechat", "公众号", "writing", "article", "search"],
+      "triggers": ["写公众号", "微信文章", "自媒体写作", "爆款文章", "内容创作"],
+      "description": "公众号文章自动化写作流程。支持资料搜索、文章撰写、爆款标题生成、排版优化",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "4 steps: search → write → generate titles → format"
     }
   ],
   "quickCommands": {
     "/skill api": "claude-api - API/SDK 开发",
     "/skill ui": "frontend-design - 前端界面",
     "/skill doc": "pdf/docx/xlsx - 文档处理",
-    "/skill video": "videoagent - 视频生成",
+    "/skill video": "video-processor - 视频生成/处理",
     "/skill image": "ai-image-generation - 图像生成",
     "/skill test": "webapp-testing - Web 测试",
-    "/skill git": "git-commit - Git 提交"
+    "/skill git": "git-commit - Git 提交",
+    "/skill release": "release-skills - 项目发布",
+    "/skill translate": "baoyu-translate - 翻译文章",
+    "/skill format": "baoyu-format-markdown - Markdown 格式化",
+    "/skill md-html": "baoyu-markdown-to-html - Markdown 转 HTML",
+    "/skill youtube": "baoyu-youtube-transcript - YouTube 字幕",
+    "/skill wechat": "baoyu-post-to-wechat - 发布公众号",
+    "/skill weibo": "baoyu-post-to-weibo - 发布微博",
+    "/skill x": "baoyu-post-to-x - 发布 X"
   }
 }

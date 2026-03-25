@@ -22,11 +22,28 @@
 │   ├── testing/        # 测试相关
 │   │   ├── mcp-builder/
 │   │   └── webapp-testing/
-│   └── utility/        # 工具类
-│       ├── git-commit/
-│       ├── changelog-generator/
-│       ├── web-scraping/
-│       └── find-skills/
+│   ├── utility/        # 工具类
+│   │   ├── git-commit/
+│   │   ├── changelog-generator/
+│   │   ├── web-scraping/
+│   │   ├── find-skills/
+│   │   ├── browser/
+│   │   ├── video-processor/
+│   │   ├── docx-format-replicator/
+│   │   └── release-skills/
+│   ├── baoyu/          # 宝玉技能
+│   │   ├── baoyu-compress-image/
+│   │   ├── baoyu-format-markdown/
+│   │   ├── baoyu-markdown-to-html/
+│   │   ├── baoyu-translate/
+│   │   ├── baoyu-url-to-markdown/
+│   │   ├── baoyu-youtube-transcript/
+│   │   └── baoyu-danger-*/
+│   └── social/         # 社交媒体发布
+│       ├── baoyu-post-to-wechat/
+│       ├── baoyu-post-to-weibo/
+│       ├── baoyu-post-to-x/
+│       └── wechat-article-writer/
 │
 └── .claude/skills/     # 符号链接指向 .skills/ (Claude Code 读取)
 ```
@@ -72,6 +89,32 @@
 | `changelog-generator` | 生成变更日志 | Git 提交 → 用户友好日志 |
 | `web-scraping` | 爬取网页内容 | 级联爬取策略，反爬绕过 |
 | `find-skills` | 查找新技能 | 发现并安装社区技能 |
+| `browser` | 浏览器自动化 | Chrome CDP 浏览器控制、截图、DOM 提取 |
+| `video-processor` | 音视频处理 | YouTube 下载、格式转换、Whisper 转录 |
+| `docx-format-replicator` | Word 格式复制 | 提取 Word 格式并生成新文档 |
+| `release-skills` | 项目发布 | 自动检测版本、生成多语言 changelog |
+
+### BaoYu Skills (宝玉技能)
+
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `baoyu-compress-image` | 压缩图片 | 图片压缩为 WebP/PNG，自动选择最佳工具 |
+| `baoyu-format-markdown` | 格式化 Markdown | 添加 frontmatter、标题、摘要、排版优化 |
+| `baoyu-markdown-to-html` | Markdown 转 HTML | 转为带样式的 HTML，支持微信外链转底部引用 |
+| `baoyu-translate` | 翻译文章 | 快速/普通/精细三种翻译模式，支持术语表 |
+| `baoyu-url-to-markdown` | URL 转 Markdown | 网页抓取转 Markdown，支持登录后可见内容 |
+| `baoyu-youtube-transcript` | YouTube 字幕 | 下载字幕/封面，支持多语言和章节分段 |
+| `baoyu-danger-gemini-web` | Gemini 生成 | 文本/图像生成，支持参考图片输入 |
+| `baoyu-danger-x-to-markdown` | X 转 Markdown | 推文/文章转 Markdown，需用户同意 |
+
+### Social/Posting (社交媒体发布)
+
+| 技能 | 触发场景 | 说明 |
+|-----|---------|------|
+| `baoyu-post-to-wechat` | 发布公众号 | 微信公众号文章/图文发布，支持 API 和浏览器 |
+| `baoyu-post-to-weibo` | 发布微博 | 微博/头条文章发布，支持 Markdown |
+| `baoyu-post-to-x` | 发布 X | X 推文/长文章发布，支持图片/视频 |
+| `wechat-article-writer` | 公众号写作 | 资料搜索、文章撰写、爆款标题、排版优化 |
 
 ## 使用指南
 
