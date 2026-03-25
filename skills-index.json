@@ -35,8 +35,8 @@
     },
     "social": {
       "name": "社交媒体发布",
-      "description": "公众号/微博/X 发布工具",
-      "skills": ["baoyu-post-to-wechat", "baoyu-post-to-weibo", "baoyu-post-to-x", "wechat-article-writer"]
+      "description": "公众号/微博/X/小红书发布工具",
+      "skills": ["baoyu-post-to-wechat", "baoyu-post-to-weibo", "baoyu-post-to-x", "wechat-article-writer", "xiaohongshu"]
     }
   },
   "skills": [
@@ -369,6 +369,17 @@
       "usageCount": 0,
       "lastUsed": null,
       "notes": "4 steps: search → write → generate titles → format"
+    },
+    {
+      "name": "xiaohongshu",
+      "path": ".skills/social/xiaohongshu",
+      "category": "social",
+      "tags": ["xiaohongshu", "rednote", "小红书", "social", "mcp"],
+      "triggers": ["小红书", "xiaohongshu", "rednote", "search xiaohongshu", "小红书笔记", "小红书舆情"],
+      "description": "小红书（RedNote）内容工具 - 搜索笔记、获取详情、发表评论、用户分析、热点跟踪、发布图文/视频笔记",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Requires xiaohongshu-mcp. Start service: ./scripts/start-mcp.sh. Status: ./scripts/status.sh"
     }
   ],
   "quickCommands": {
@@ -386,6 +397,7 @@
     "/skill youtube": "baoyu-youtube-transcript - YouTube 字幕",
     "/skill wechat": "baoyu-post-to-wechat - 发布公众号",
     "/skill weibo": "baoyu-post-to-weibo - 发布微博",
-    "/skill x": "baoyu-post-to-x - 发布 X"
+    "/skill x": "baoyu-post-to-x - 发布 X",
+    "/skill xiaohongshu": "xiaohongshu - 小红书搜索/发布"
   }
 }
