@@ -1,0 +1,49 @@
+---
+description: Route tasks to local skills — read skills-index.json and the matching SKILL.md before implementing
+alwaysApply: true
+---
+
+# Skills library (from `skills-index.json`)
+
+This repository keeps agent skills under `.skills/` (see `skills-index.json` at the repo root for paths, triggers, tags, notes, and categories).
+
+## What you must do
+
+1. **Treat `skills-index.json` as the catalog of record.** When the user’s request matches any skill’s `triggers`, `tags`, or `description` (including Chinese keywords), treat that as a signal to use that skill.
+2. **Before writing commands or code for that task**, read the skill instructions from:
+
+   `{path}/SKILL.md`
+
+   where `path` is taken from the matching object in `skills-index.json` (repository root–relative).
+
+3. **Follow the skill file** for workflows, scripts, consent requirements, env vars, and CLI entrypoints. Do not improvise a parallel workflow if a skill already defines one.
+4. If **several** skills match, prefer the **most specific** one (narrower scope / clearer file-type match). If still ambiguous, ask **one** short clarifying question.
+5. **Optional:** Claude Code symlink layout `.claude/skills/` may exist for the same names; in Cursor, prefer the paths in `skills-index.json` under `.skills/`.
+
+## Quick phrases (`quickCommands` in `skills-index.json`)
+
+Users may type shortcuts like below; map them to the named skill(s) on the right and then read that skill’s `SKILL.md`.
+
+| User shortcut | Intent (skill side) |
+|---------------|---------------------|
+| `/skill api` | `claude-api` |
+| `/skill ui` | `frontend-design` |
+| `/skill doc` | `pdf`, `docx`, or `xlsx` (pick by file/task) |
+| `/skill video` | `video-processor` |
+| `/skill image` | `ai-image-generation` |
+| `/skill ffmpeg` | `ffmpeg` |
+| `/skill test` | `webapp-testing` |
+| `/skill git` | `git-commit` |
+| `/skill release` | `release-skills` |
+| `/skill translate` | `baoyu-translate` |
+| `/skill format` | `baoyu-format-markdown` |
+| `/skill md-html` | `baoyu-markdown-to-html` |
+| `/skill youtube` | `baoyu-youtube-transcript` |
+| `/skill wechat` | `baoyu-post-to-wechat` |
+| `/skill weibo` | `baoyu-post-to-weibo` |
+| `/skill x` | `baoyu-post-to-x` |
+| `/skill xiaohongshu` | `xiaohongshu` |
+
+## Safety / compliance
+
+Skills whose names start with `baoyu-danger-` may require **explicit user consent** or special setup. Read their `SKILL.md` and follow consent and risk sections; do not bypass them.

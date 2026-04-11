@@ -151,6 +151,17 @@
       "notes": "支持 7 个后端：minimax, kling, veo, hunyuan, grok, seedance, pixverse"
     },
     {
+      "name": "ffmpeg",
+      "path": ".skills/media/ffmpeg",
+      "category": "media",
+      "tags": ["ffmpeg", "video", "audio", "remotion", "gif", "mp4"],
+      "triggers": ["ffmpeg", "GIF to MP4", "convert video", "resize video", "extract audio", "compress video", "audio extraction", "视频转码", "音频提取"],
+      "description": "Video and audio processing with FFmpeg — conversion, resize, compression, audio extraction",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Common for Remotion assets; see SKILL.md for flags"
+    },
+    {
       "name": "web-scraping",
       "path": ".skills/utility/web-scraping",
       "category": "utility",
@@ -240,7 +251,7 @@
     },
     {
       "name": "baoyu-compress-image",
-      "path": ".skills/baoyu/baoyu-compress-image",
+      "path": ".skills/utility/baoyu-compress-image",
       "category": "baoyu",
       "tags": ["image", "compress", "optimize", "webp", "png"],
       "triggers": ["compress image", "optimize image", "convert to webp", "reduce image size"],
@@ -251,7 +262,7 @@
     },
     {
       "name": "baoyu-format-markdown",
-      "path": ".skills/baoyu/baoyu-format-markdown",
+      "path": ".skills/utility/baoyu-format-markdown",
       "category": "baoyu",
       "tags": ["markdown", "format", "beautify", "frontmatter", "title"],
       "triggers": ["format markdown", "beautify article", "add formatting", "improve layout"],
@@ -262,7 +273,7 @@
     },
     {
       "name": "baoyu-markdown-to-html",
-      "path": ".skills/baoyu/baoyu-markdown-to-html",
+      "path": ".skills/utility/baoyu-markdown-to-html",
       "category": "baoyu",
       "tags": ["markdown", "html", "converter", "wechat", "theme"],
       "triggers": ["markdown to html", "convert md to html", "md 转 html", "微信外链转底部引用"],
@@ -273,7 +284,7 @@
     },
     {
       "name": "baoyu-translate",
-      "path": ".skills/baoyu/baoyu-translate",
+      "path": ".skills/utility/baoyu-translate",
       "category": "baoyu",
       "tags": ["translate", "translation", "localization", "chinese", "english"],
       "triggers": ["translate", "翻译", "精翻", "translate article", "translate to Chinese", "translate to English", "改成中文", "改成英文"],
@@ -284,7 +295,7 @@
     },
     {
       "name": "baoyu-url-to-markdown",
-      "path": ".skills/baoyu/baoyu-url-to-markdown",
+      "path": ".skills/utility/baoyu-url-to-markdown",
       "category": "baoyu",
       "tags": ["url", "markdown", "scrape", "chrome", "cdp"],
       "triggers": ["url to markdown", "fetch page", "save webpage", "网页转 markdown"],
@@ -295,7 +306,7 @@
     },
     {
       "name": "baoyu-youtube-transcript",
-      "path": ".skills/baoyu/baoyu-youtube-transcript",
+      "path": ".skills/utility/baoyu-youtube-transcript",
       "category": "baoyu",
       "tags": ["youtube", "transcript", "subtitle", "caption", "cover"],
       "triggers": ["YouTube transcript", "download subtitles", "get captions", "YouTube 字幕", "YouTube 封面", "video thumbnail"],
@@ -306,7 +317,7 @@
     },
     {
       "name": "baoyu-danger-gemini-web",
-      "path": ".skills/baoyu/baoyu-danger-gemini-web",
+      "path": ".skills/utility/danger/baoyu-danger-gemini-web",
       "category": "baoyu",
       "tags": ["gemini", "google", "image-generation", "text-generation", "vision"],
       "triggers": ["gemini image", "gemini text", "generate image with gemini", "gemini web api"],
@@ -317,7 +328,7 @@
     },
     {
       "name": "baoyu-danger-x-to-markdown",
-      "path": ".skills/baoyu/baoyu-danger-x-to-markdown",
+      "path": ".skills/utility/danger/baoyu-danger-x-to-markdown",
       "category": "baoyu",
       "tags": ["x", "twitter", "tweet", "markdown", "archive"],
       "triggers": ["x to markdown", "tweet to markdown", "save tweet", "x.com", "twitter.com"],
@@ -328,7 +339,7 @@
     },
     {
       "name": "baoyu-post-to-wechat",
-      "path": ".skills/social/baoyu-post-to-wechat",
+      "path": ".skills/utility/social/baoyu-post-to-wechat",
       "category": "social",
       "tags": ["wechat", "official-account", "publish", "公众号", "api", "browser"],
       "triggers": ["发布公众号", "post to wechat", "微信公众号", "贴图", "图文", "文章"],
@@ -339,7 +350,7 @@
     },
     {
       "name": "baoyu-post-to-weibo",
-      "path": ".skills/social/baoyu-post-to-weibo",
+      "path": ".skills/utility/social/baoyu-post-to-weibo",
       "category": "social",
       "tags": ["weibo", "微博", "publish", "headline", "article"],
       "triggers": ["post to weibo", "发微博", "发布微博", "publish to weibo", "微博头条文章"],
@@ -350,7 +361,7 @@
     },
     {
       "name": "baoyu-post-to-x",
-      "path": ".skills/social/baoyu-post-to-x",
+      "path": ".skills/utility/social/baoyu-post-to-x",
       "category": "social",
       "tags": ["x", "twitter", "tweet", "publish", "article"],
       "triggers": ["post to x", "tweet", "publish to twitter", "share on x"],
@@ -361,7 +372,7 @@
     },
     {
       "name": "wechat-article-writer",
-      "path": ".skills/social/wechat-article-writer",
+      "path": ".skills/utility/wechat-article-writer",
       "category": "social",
       "tags": ["wechat", "公众号", "writing", "article", "search"],
       "triggers": ["写公众号", "微信文章", "自媒体写作", "爆款文章", "内容创作"],
@@ -372,7 +383,7 @@
     },
     {
       "name": "xiaohongshu",
-      "path": ".skills/social/xiaohongshu",
+      "path": ".skills/utility/social/xiaohongshu",
       "category": "social",
       "tags": ["xiaohongshu", "rednote", "小红书", "social", "mcp"],
       "triggers": ["小红书", "xiaohongshu", "rednote", "search xiaohongshu", "小红书笔记", "小红书舆情"],
@@ -388,6 +399,7 @@
     "/skill doc": "pdf/docx/xlsx - 文档处理",
     "/skill video": "video-processor - 视频生成/处理",
     "/skill image": "ai-image-generation - 图像生成",
+    "/skill ffmpeg": "ffmpeg - FFmpeg 音视频处理",
     "/skill test": "webapp-testing - Web 测试",
     "/skill git": "git-commit - Git 提交",
     "/skill release": "release-skills - 项目发布",
