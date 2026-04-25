@@ -126,10 +126,30 @@
       "sourceType": "github",
       "computedHash": "2607fc60629b82b257136dd2a7a373f0a4466c0b49df7746d845d59313c99b21"
     },
+    "html-to-ppt": {
+      "source": "claude-office-skills/skills",
+      "sourceType": "github",
+      "computedHash": "c42651b50a4f9bbfc5e433784ba3255da097e2c8bfc9d2978dbe4e3c2dc5adf1"
+    },
     "release-skills": {
       "source": "jimliu/baoyu-skills",
       "sourceType": "github",
       "computedHash": "46f1ac451fde67907c437a1c72a2c0ac8b7d4e5f6a896b0cd33e13215c8a4898"
+    },
+    "remotion-best-practices": {
+      "source": "remotion-dev/skills",
+      "sourceType": "github",
+      "computedHash": "a6a79c92a109339759d7b465f2d45fe11ce955e307a3e2c03fbcf4f9b624b77a"
+    },
+    "slidev": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "computedHash": "ecde2e0d684f770a50c8718ab036e5df5e1ead082cb608739673507079a524a3"
+    },
+    "tailwindcss": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "computedHash": "1715717d38abba1c4b11f2e95a94681cdb1dddbcb28379637b591a16b50bcd4d"
     },
     "video-processor": {
       "source": "local",

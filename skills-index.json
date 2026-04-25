@@ -1,7 +1,7 @@
 {
   "owner": "linwh",
   "description": "个人 Claude Code 技能库 - 技能索引",
-  "lastUpdated": "2026-03-25",
+  "lastUpdated": "2026-04-25",
   "categories": {
     "core": {
       "name": "核心技能",
@@ -16,7 +16,7 @@
     "media": {
       "name": "媒体生成",
       "description": "AI 图像/视频生成",
-      "skills": ["ai-image-generation", "videoagent-video-studio", "ffmpeg"]
+      "skills": ["ai-image-generation", "videoagent-video-studio", "ffmpeg", "slidev", "remotion-best-practices", "hui-html"]
     },
     "testing": {
       "name": "测试相关",
@@ -160,6 +160,39 @@
       "usageCount": 0,
       "lastUsed": null,
       "notes": "Common for Remotion assets; see SKILL.md for flags"
+    },
+    {
+      "name": "slidev",
+      "path": ".skills/media/slidev",
+      "category": "media",
+      "tags": ["slides", "ppt", "presentation", "slidev", "deck", "markdown"],
+      "triggers": ["slidev", "PPT", "presentation", "slides", "deck", "演示文稿", "幻灯片"],
+      "description": "Create and present web-based slide decks using Slidev",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Markdown-first technical slides; docs: https://sli.dev"
+    },
+    {
+      "name": "remotion-best-practices",
+      "path": ".skills/media/remotion-best-practices",
+      "category": "media",
+      "tags": ["remotion", "video", "react", "animation", "composition"],
+      "triggers": ["remotion", "video composition", "animation timeline", "render video", "字幕", "视频渲染"],
+      "description": "Best practices for Remotion video creation in React",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Source: remotion-dev/skills@remotion-best-practices"
+    },
+    {
+      "name": "hui-html",
+      "path": ".skills/media/hui-html",
+      "category": "media",
+      "tags": ["html", "tailwind", "ppt", "slides", "presentation", "web", "glassmorphism"],
+      "triggers": ["HTML PPT", "Tailwind PPT", "Tallwind PPT", "演示文稿网页", "幻灯片网页", "web slides", "hui-html", "玻璃态单屏切页"],
+      "description": "Build HUI-style glass PPT webpages using HTML and Tailwind CSS",
+      "usageCount": 0,
+      "lastUsed": null,
+      "notes": "Default style: single-screen deck, theme switch, stable keyframe 3D enter, fullscreen, card contents (see SKILL.md + references)"
     },
     {
       "name": "web-scraping",

@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML + Tailwind · Glass Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              glass: "0 0 0 1px rgba(255,255,255,.4), 0 25px 50px -12px rgba(14,116,144,.15)"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      [data-theme-gradient-text] {
+        background-image: var(--theme-gradient, linear-gradient(90deg, #0ea5e9, #22d3ee));
+      }
+      [data-deck-nav-scroll] {
+        scrollbar-gutter: stable;
+        max-height: 6.75rem;
+        transition: max-height 220ms ease;
+      }
+      [data-deck-nav-scroll]:not(:hover) {
+        overflow-y: hidden;
+      }
+      [data-deck-nav-scroll]:hover {
+        max-height: 20rem;
+        overflow-y: auto;
+      }
+      [data-deck-nav-scroll]::-webkit-scrollbar {
+        width: 8px;
+      }
+      [data-deck-nav-scroll]::-webkit-scrollbar-thumb {
+        border-radius: 9999px;
+        background: rgba(148, 163, 184, 0.5);
+      }
+      [data-deck-nav-scroll]::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      [data-deck-nav-card] {
+        transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
+      }
+      [data-deck-nav-card]:hover {
+        transform: translateY(-1px);
+      }
+      [data-deck-nav-card].nav-click-pop {
+        animation: navPop 340ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      @keyframes navPop {
+        0% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(0.965);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      #deck-viewport {
+        perspective: 1800px;
+        transform-style: preserve-3d;
+        overflow: hidden;
+      }
+      [data-deck-slide] {
+        backface-visibility: hidden;
+        transform-origin: center center;
+        will-change: transform;
+      }
+      [data-deck-slide].slide-active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+        transform-origin: 50% 50%;
+        pointer-events: auto;
+      }
+      [data-deck-slide].slide-enter-right {
+        animation: deckEnterFromRight 320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      }
+      [data-deck-slide].slide-enter-left {
+        animation: deckEnterFromLeft 320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      }
+      @keyframes deckEnterFromRight {
+        from {
+          transform: translate3d(6%, 0, 0) rotateY(-5deg) scale(0.988);
+          transform-origin: 85% 50%;
+        }
+        to {
+          transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+          transform-origin: 50% 50%;
+        }
+      }
+      @keyframes deckEnterFromLeft {
+        from {
+          transform: translate3d(-6%, 0, 0) rotateY(5deg) scale(0.988);
+          transform-origin: 15% 50%;
+        }
+        to {
+          transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+          transform-origin: 50% 50%;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [data-deck-slide] {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen text-slate-800 antialiased"
+  >
+    <div class="flex min-h-screen flex-col gap-4 p-4 md:p-5 lg:flex-row lg:gap-6 lg:p-6">
+      <!-- Left: deck chrome -->
+      <aside
+        class="flex w-full flex-col gap-4 rounded-3xl border border-white/40 bg-white/60 p-5 shadow-glass shadow-xl backdrop-blur-xl lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:w-[min(28%,22rem)] lg:shrink-0 lg:overflow-y-auto"
+      >
+        <header class="flex items-start gap-3">
+          <div
+            data-theme-gradient-bg
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-sm font-bold text-white shadow-lg"
+          >
+            H5
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Web 演示文档</p>
+            <p class="text-[11px] font-medium uppercase tracking-wider text-slate-500">HUI · HTML DECK</p>
+          </div>
+        </header>
+
+        <div
+          class="rounded-2xl border border-white/50 bg-white/50 p-4 shadow-sm backdrop-blur-sm"
+        >
+          <div class="mb-2 flex flex-wrap gap-2">
+            <span class="rounded-lg bg-sky-100/90 px-2 py-0.5 text-[10px] font-semibold text-sky-800"
+              >OVERVIEW</span
+            >
+            <span
+              data-theme-label
+              class="rounded-lg border border-cyan-200/80 bg-cyan-50/80 px-2 py-0.5 text-[10px] font-semibold text-cyan-800"
+              >OCEAN</span
+            >
+          </div>
+          <h2 class="text-lg font-bold leading-snug text-slate-900">用网页交付「像 PPT 一样好读」的叙事</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">
+            玻璃态分栏、主卡片与进度，适合产品路演、教学与内部分享。
+          </p>
+        </div>
+
+        <div>
+          <div
+            class="mb-2 flex items-baseline justify-between text-[11px] font-semibold uppercase tracking-wider text-slate-500"
+          >
+            <span>Contents</span>
+            <span>6 Slides</span>
+          </div>
+          <nav
+            data-deck-nav-scroll
+            class="space-y-2 overflow-y-hidden pr-1"
+            aria-label="Slide navigation"
+          >
+            <a
+              data-deck-nav-card
+              data-deck-nav-item
+              data-deck-index="0"
+              href="#slide-1"
+              class="block min-h-[5.5rem] rounded-2xl border border-transparent bg-white/55 px-3 py-2.5 text-slate-700 shadow-sm transition hover:bg-white/80"
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">01 · 封面</p>
+              <p class="mt-1 text-sm font-semibold text-slate-800">玻璃态 Deck 开场</p>
+              <p class="mt-1 truncate text-xs text-slate-600">交代主题、场景与整体浏览入口。</p>
+            </a
+            >
+            <a
+              data-deck-nav-card
+              data-deck-nav-item
+              data-deck-index="1"
+              href="#slide-2"
+              class="block min-h-[5.5rem] rounded-2xl border border-transparent bg-white/55 px-3 py-2.5 text-slate-700 shadow-sm transition hover:bg-white/80"
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">02 · 目录</p>
+              <p class="mt-1 text-sm font-semibold text-slate-800">Agenda 导航总览</p>
+              <p class="mt-1 truncate text-xs text-slate-600">按“一屏一重点”串联完整叙事路径。</p>
+            </a
+            >
+            <a
+              data-deck-nav-card
+              data-deck-nav-item
+              data-deck-index="2"
+              href="#slide-3"
+              class="block min-h-[5.5rem] rounded-2xl border border-transparent bg-white/55 px-3 py-2.5 text-slate-700 shadow-sm transition hover:bg-white/80"
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">03 · 洞察</p>
+              <p class="mt-1 text-sm font-semibold text-slate-800">背景与关键发现</p>
+              <p class="mt-1 truncate text-xs text-slate-600">用数据和问题定义内容表达目标。</p>
+            </a
+            >
+            <a
+              data-deck-nav-card
+              data-deck-nav-item
+              data-deck-index="3"
+              href="#slide-4"
+              class="block min-h-[5.5rem] rounded-2xl border border-transparent bg-white/55 px-3 py-2.5 text-slate-700 shadow-sm transition hover:bg-white/80"
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">04 · 方案</p>
+              <p class="mt-1 text-sm font-semibold text-slate-800">结构 × 视觉 × 交互</p>
+              <p class="mt-1 truncate text-xs text-slate-600">把设计系统拆成可复用的三层模块。</p>
+            </a
+            >
+            <a
+              data-deck-nav-card
+              data-deck-nav-item
+              data-deck-index="4"
+              href="#slide-5"
+              class="block min-h-[5.5rem] rounded-2xl border border-transparent bg-white/55 px-3 py-2.5 text-slate-700 shadow-sm transition hover:bg-white/80"
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">05 · 计划</p>
+              <p class="mt-1 text-sm font-semibold text-slate-800">三周落地节奏</p>
+              <p class="mt-1 truncate text-xs text-slate-600">从主题骨架到验收发布逐周推进。</p>
+            </a
+            >
+            <a
+              data-deck-nav-card
+              data-deck-nav-item
+              data-deck-index="5"
+              href="#slide-6"
+              class="block min-h-[5.5rem] rounded-2xl border border-transparent bg-white/55 px-3 py-2.5 text-slate-700 shadow-sm transition hover:bg-white/80"
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">06 · 结尾</p>
+              <p class="mt-1 text-sm font-semibold text-slate-800">CTA 与下一步</p>
+              <p class="mt-1 truncate text-xs text-slate-600">收束主线并引导继续复用模板。</p>
+            </a
+            >
+          </nav>
+        </div>
+
+        <div class="mt-auto space-y-3 border-t border-slate-200/60 pt-3">
+          <div class="rounded-2xl border border-white/40 bg-white/40 p-4">
+            <div class="flex items-center justify-between text-xs font-medium text-slate-600">
+              <span>学习进度</span>
+              <span id="deck-progress-text" class="font-bold text-sky-700">1/6</span>
+            </div>
+            <div class="mt-2 h-2 overflow-hidden rounded-full bg-slate-200/80">
+              <div
+                id="deck-progress-bar"
+                data-theme-gradient-bg
+                class="h-full w-[16.66%] rounded-full transition-[width] duration-300"
+              ></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[10px] text-slate-500">
+            <div>
+              <p class="font-bold uppercase text-slate-400">Control</p>
+              <p>点目录或右上方 ‹ › 切换</p>
+            </div>
+            <div>
+              <p class="font-bold uppercase text-slate-400">Style</p>
+              <p id="deck-style-text">OCEAN 浅蓝青 · 玻璃主卡</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right: single-slide viewport (no inter-slide scroll) -->
+      <main
+        data-deck-main
+        class="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl lg:h-[calc(100dvh-3rem)]"
+      >
+        <div
+          id="deck-global-chrome"
+          class="mb-1 flex flex-shrink-0 flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/50 bg-white/60 px-4 py-3 shadow-glass shadow-lg backdrop-blur-md"
+        >
+          <span class="text-[11px] font-medium uppercase tracking-wider text-slate-500"
+            >Web Learning Deck / 2026</span
+          >
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="hidden gap-1.5 sm:flex" aria-hidden="true"
+              ><i class="h-2.5 w-2.5 rounded-full bg-sky-400"></i
+              ><i class="h-2.5 w-2.5 rounded-full bg-cyan-400"></i
+              ><i class="h-2.5 w-2.5 rounded-full bg-emerald-400"></i
+              ><i class="h-2.5 w-2.5 rounded-full bg-indigo-300"></i
+            ></span>
+            <button
+              type="button"
+              data-deck-theme-toggle
+              class="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 text-slate-600 shadow-sm transition hover:bg-slate-50"
+              aria-label="切换颜色风格"
+              title="切换颜色风格"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
+                <path d="M12 3a9 9 0 1 0 0 18h1.2a2.8 2.8 0 0 0 0-5.6h-1a1.8 1.8 0 0 1 0-3.6H14A5 5 0 0 0 14 3h-2Zm-4 7a1.3 1.3 0 1 1 0-2.6A1.3 1.3 0 0 1 8 10Zm2.1 5.2a1.3 1.3 0 1 1 0-2.6a1.3 1.3 0 0 1 0 2.6Zm4.8-6.7a1.3 1.3 0 1 1 0-2.6a1.3 1.3 0 0 1 0 2.6Zm3.2 4.5a1.3 1.3 0 1 1 0-2.6a1.3 1.3 0 0 1 0 2.6Z"></path>
+              </svg>
+            </button>
+            <span
+              data-theme-label
+              class="rounded-lg border border-sky-200/80 bg-sky-100/90 px-2 py-1 text-[10px] text-sky-800"
+              >OCEAN</span
+            >
+            <button
+              type="button"
+              data-deck-fullscreen-toggle
+              class="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 text-slate-600 shadow-sm transition hover:bg-slate-50"
+              aria-label="进入全屏"
+              title="进入全屏"
+            >
+              <svg
+                data-fullscreen-enter-icon
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                class="h-4 w-4 fill-current"
+              >
+                <path d="M4 9h2V6h3V4H4v5Zm13-5v2h3v3h2V4h-5Zm3 13h-3v2h5v-5h-2v3ZM6 14H4v5h5v-2H6v-3Z"></path>
+              </svg>
+              <svg
+                data-fullscreen-exit-icon
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                class="hidden h-4 w-4 fill-current"
+              >
+                <path d="M8 16H5v3h3v-3Zm11 0h-3v3h3v-3ZM8 5H5v3h3V5Zm11 0h-3v3h3V5ZM10 14H7v3h3v-3Zm7 0h-3v3h3v-3ZM10 7H7v3h3V7Zm7 0h-3v3h3V7Z"></path>
+              </svg>
+            </button>
+            <button
+              type="button"
+              data-deck-prev
+              class="rounded-xl border border-slate-200/90 bg-white/90 px-3 py-1.5 text-slate-600 shadow-sm transition hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-40"
+              aria-label="上一页"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              data-deck-next
+              class="rounded-xl border border-slate-200/90 bg-white/90 px-3 py-1.5 text-slate-600 shadow-sm transition hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-40"
+              aria-label="下一页"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+
+        <div id="deck-viewport" class="relative min-h-0 flex-1">
+          <!-- Slide 1 -->
+          <section
+            data-deck-slide
+            data-deck-index="0"
+            id="slide-1"
+            class="absolute inset-0 z-10 flex min-h-0 flex-col overflow-y-auto p-1 pb-4"
+            aria-hidden="false"
+          >
+            <div
+              class="flex min-h-0 w-full flex-1 flex-col rounded-[2rem] border border-white/50 bg-white/70 p-6 shadow-2xl shadow-sky-900/10 backdrop-blur-xl md:min-h-[min(100%,32rem)] md:p-10"
+            >
+              <p
+                class="reveal in mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/90 px-3 py-1 text-xs font-medium text-sky-800"
+              >
+                <span class="h-1.5 w-1.5 rounded-full bg-sky-500"></span>
+                封面 · 玻璃态 PPT 网页
+              </p>
+              <h1 class="reveal in text-3xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl lg:text-5xl">
+                用
+                <span
+                  data-theme-gradient-text
+                  class="bg-clip-text text-transparent"
+                  >HTML + Tailwind</span
+                >
+                做一份像幻灯片一样好演好分享的页面
+              </h1>
+              <p class="reveal in mt-4 max-w-2xl text-base text-slate-600 md:text-lg">
+                左侧目录与进度、右侧主卡片：单文件即可部署，适合路演、教学与内部分享。
+              </p>
+              <div class="reveal in mt-8 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  data-deck-goto="1"
+                  data-theme-gradient-bg
+                  class="rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-lg"
+                >
+                  开始浏览
+                </button>
+                <button
+                  type="button"
+                  data-deck-goto="5"
+                  class="rounded-2xl border border-slate-200/90 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-800 hover:border-sky-300"
+                >
+                  跳到结尾
+                </button>
+              </div>
+              <p
+                class="data-deck-slide-footer mt-auto border-t border-slate-200/80 pt-6 text-center text-[11px] font-medium tracking-wide text-slate-500"
+              >
+                SLIDE 01 · HUI HTML DECK
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 2 -->
+          <section
+            data-deck-slide
+            data-deck-index="1"
+            id="slide-2"
+            class="absolute inset-0 z-0 hidden min-h-0 flex-col overflow-y-auto p-1 pb-4"
+            aria-hidden="true"
+          >
+            <div
+              class="flex min-h-0 w-full flex-1 flex-col rounded-[2rem] border border-white/50 bg-white/70 p-6 shadow-2xl backdrop-blur-xl md:min-h-[min(100%,32rem)] md:p-10"
+            >
+              <h2 class="reveal text-2xl font-bold text-slate-900 md:text-3xl">目录 / Agenda</h2>
+              <p class="reveal mt-2 text-slate-600">每节对应一屏主卡片，每屏只讲清一个重点。</p>
+              <ol class="reveal mt-6 space-y-3 text-base font-medium text-slate-800">
+                <li class="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-3">
+                  <span
+                    class="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-100 text-sm font-bold text-sky-800"
+                    >1</span
+                  >
+                  价值与场景区分
+                </li>
+                <li class="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-3">
+                  <span
+                    class="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-100 text-sm font-bold text-sky-800"
+                    >2</span
+                  >
+                  信息架构与视觉系统
+                </li>
+                <li class="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-3">
+                  <span
+                    class="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-100 text-sm font-bold text-sky-800"
+                    >3</span
+                  >
+                  实施节奏与 CTA
+                </li>
+              </ol>
+              <p
+                class="data-deck-slide-footer mt-auto border-t border-slate-200/80 pt-6 text-center text-[11px] font-medium text-slate-500"
+              >
+                SLIDE 02 · HUI HTML DECK
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 3 -->
+          <section
+            data-deck-slide
+            data-deck-index="2"
+            id="slide-3"
+            class="absolute inset-0 z-0 hidden min-h-0 flex-col overflow-y-auto p-1 pb-4"
+            aria-hidden="true"
+          >
+            <div
+              class="flex min-h-0 w-full flex-1 flex-col rounded-[2rem] border border-white/50 bg-white/70 p-6 shadow-2xl backdrop-blur-xl md:min-h-[min(100%,32rem)] md:p-10"
+            >
+              <div class="reveal grid gap-8 lg:grid-cols-12 lg:items-center">
+                <div class="lg:col-span-7">
+                  <h2 class="text-2xl font-bold text-slate-900 md:text-3xl">背景与核心洞察</h2>
+                  <ul class="mt-4 space-y-3 text-slate-600">
+                    <li class="flex gap-2"><span class="text-sky-500">•</span> 文档型 PPT 难迭代，网页版可版本化与 A/B 文案。</li>
+                    <li class="flex gap-2"><span class="text-sky-500">•</span> 玻璃分栏在投影与大屏上对比清晰、观感现代。</li>
+                    <li class="flex gap-2"><span class="text-sky-500">•</span> Tailwind 用工具类控制节奏，比手写 CSS 更稳。</li>
+                  </ul>
+                </div>
+                <div class="lg:col-span-5">
+                  <div
+                    class="rounded-2xl border border-cyan-200/60 bg-gradient-to-br from-sky-100/80 to-cyan-50/90 p-6 shadow-inner"
+                  >
+                    <p class="text-xs font-bold uppercase tracking-wider text-cyan-800">Key Metric</p>
+                    <p class="mt-2 text-4xl font-extrabold text-slate-900">+42%</p>
+                    <p class="mt-1 text-sm text-slate-600">内容更新与协作效率（示例）</p>
+                  </div>
+                </div>
+              </div>
+              <p
+                class="data-deck-slide-footer mt-auto border-t border-slate-200/80 pt-6 text-center text-[11px] font-medium text-slate-500"
+              >
+                SLIDE 03 · HUI HTML DECK
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 4 -->
+          <section
+            data-deck-slide
+            data-deck-index="3"
+            id="slide-4"
+            class="absolute inset-0 z-0 hidden min-h-0 flex-col overflow-y-auto p-1 pb-4"
+            aria-hidden="true"
+          >
+            <div
+              class="flex min-h-0 w-full flex-1 flex-col rounded-[2rem] border border-white/50 bg-white/70 p-6 shadow-2xl backdrop-blur-xl md:min-h-[min(100%,32rem)] md:p-8 lg:p-10"
+            >
+              <p
+                class="reveal mb-2 inline-flex w-fit rounded-full border border-cyan-200/80 bg-cyan-50/90 px-3 py-1 text-xs font-medium text-cyan-900"
+              >
+                信息架构
+              </p>
+              <h2 class="reveal text-2xl font-bold text-slate-900 md:text-3xl">
+                三层拆解：<span
+                  data-theme-gradient-text
+                  class="bg-clip-text text-transparent"
+                  >结构、视觉、交互</span
+                >
+              </h2>
+              <div class="reveal mt-6 grid gap-4 md:grid-cols-3">
+                <article class="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4">
+                  <h3 class="text-sm font-bold text-sky-800">结构层</h3>
+                  <p class="mt-1 text-sm text-slate-600">slide 分节 + 侧栏状态同步。</p>
+                </article>
+                <article class="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4">
+                  <h3 class="text-sm font-bold text-sky-800">视觉层</h3>
+                  <p class="mt-1 text-sm text-slate-600">玻璃、渐变大标题、暗色代码区对比。</p>
+                </article>
+                <article class="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4">
+                  <h3 class="text-sm font-bold text-sky-800">交互层</h3>
+                  <p class="mt-1 text-sm text-slate-600">目录与箭头切换单屏，长内容在屏内滚动。</p>
+                </article>
+              </div>
+              <div class="reveal mt-6 grid gap-4 lg:grid-cols-3">
+                <div class="overflow-x-auto rounded-2xl bg-slate-900 p-4 font-mono text-xs leading-relaxed text-slate-100 shadow-inner">
+                  <pre><code>if ok:
+    run()
+else:
+    fix()</code></pre>
+                </div>
+                <div class="overflow-x-auto rounded-2xl bg-slate-900 p-4 font-mono text-xs leading-relaxed text-slate-100 shadow-inner">
+                  <pre><code>for x in items:
+    step(x)
+while n &lt; 3:
+    n += 1</code></pre>
+                </div>
+                <div class="flex flex-col rounded-2xl border border-slate-700/80 bg-slate-800 p-4 text-slate-100">
+                  <p class="text-[10px] font-bold uppercase tracking-wider text-cyan-300">How to explain</p>
+                  <p class="mt-2 text-sm text-slate-200">用「先判断再分支、需要重复就用循环」概括控制流，听众最容易跟上。</p>
+                </div>
+              </div>
+              <p
+                class="data-deck-slide-footer mt-auto border-t border-slate-200/80 pt-5 text-center text-[11px] font-medium text-slate-500"
+              >
+                SLIDE 04 · HUI HTML DECK
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 5 -->
+          <section
+            data-deck-slide
+            data-deck-index="4"
+            id="slide-5"
+            class="absolute inset-0 z-0 hidden min-h-0 flex-col overflow-y-auto p-1 pb-4"
+            aria-hidden="true"
+          >
+            <div
+              class="flex min-h-0 w-full flex-1 flex-col rounded-[2rem] border border-white/50 bg-white/70 p-6 shadow-2xl backdrop-blur-xl md:min-h-[min(100%,32rem)] md:p-10"
+            >
+              <h2 class="reveal text-2xl font-bold text-slate-900 md:text-3xl">实施计划</h2>
+              <p class="reveal mt-2 text-slate-600">以周为粒度，先可演示、再可量产。</p>
+              <div class="reveal mt-6 space-y-3">
+                <div class="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4">
+                  <p class="font-semibold text-slate-900">Week 1 — 分栏与主题</p>
+                  <p class="mt-1 text-sm text-slate-600">落地玻璃态 token、主卡与侧栏组件。</p>
+                </div>
+                <div class="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4">
+                  <p class="font-semibold text-slate-900">Week 2 — 内容与动效</p>
+                  <p class="mt-1 text-sm text-slate-600">补全每页主标题、子卡、代码/说明区。</p>
+                </div>
+                <div class="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-4">
+                  <p class="font-semibold text-slate-900">Week 3 — 验收与发布</p>
+                  <p class="mt-1 text-sm text-slate-600">移动端断点、性能与部署。</p>
+                </div>
+              </div>
+              <p
+                class="data-deck-slide-footer mt-auto border-t border-slate-200/80 pt-6 text-center text-[11px] font-medium text-slate-500"
+              >
+                SLIDE 05 · HUI HTML DECK
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 6 -->
+          <section
+            data-deck-slide
+            data-deck-index="5"
+            id="slide-6"
+            class="absolute inset-0 z-0 hidden min-h-0 flex-col overflow-y-auto p-1 pb-4"
+            aria-hidden="true"
+          >
+            <div
+              class="flex min-h-0 w-full flex-1 flex-col rounded-[2rem] border border-white/50 bg-white/70 p-6 shadow-2xl backdrop-blur-xl md:min-h-[min(100%,32rem)] md:p-10"
+            >
+              <p data-theme-accent-text class="reveal text-sm font-semibold text-sky-700">Thank you</p>
+              <h2 class="reveal mt-1 text-2xl font-bold text-slate-900 md:text-4xl">准备好把下一套叙事做成同样的玻璃态 Deck？</h2>
+              <p class="reveal mt-3 max-w-2xl text-slate-600">替换文案与 `slide` 节即可复用。需要导出 PPT 时可配合 Marp 或静态截图。</p>
+              <div class="reveal mt-6 flex flex-wrap gap-3">
+                <a
+                  href="python-tutorial.html"
+                  class="rounded-2xl border border-slate-200/90 bg-white/90 px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-sky-300"
+                  >查看 Python 教程示例</a
+                >
+                <button
+                  type="button"
+                  data-theme-gradient-bg
+                  class="rounded-2xl px-4 py-2.5 text-sm font-semibold text-white shadow-md"
+                  onclick="location.reload()"
+                >
+                  刷新本页
+                </button>
+              </div>
+              <p
+                class="data-deck-slide-footer mt-auto border-t border-slate-200/80 pt-6 text-center text-[11px] font-medium text-slate-500"
+              >
+                SLIDE 06 · HUI HTML DECK
+              </p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const main = document.querySelector("[data-deck-main]");
+        const slides = document.querySelectorAll("[data-deck-slide]");
+        const navItems = document.querySelectorAll("[data-deck-nav-item]");
+        const navScroll = document.querySelector("[data-deck-nav-scroll]");
+        const progressText = document.getElementById("deck-progress-text");
+        const progressBar = document.getElementById("deck-progress-bar");
+        const styleText = document.getElementById("deck-style-text");
+        const themeToggleBtn = document.querySelector("[data-deck-theme-toggle]");
+        const fullscreenBtn = document.querySelector("[data-deck-fullscreen-toggle]");
+        const fullscreenEnterIcon = document.querySelector("[data-fullscreen-enter-icon]");
+        const fullscreenExitIcon = document.querySelector("[data-fullscreen-exit-icon]");
+        const themeLabelEls = document.querySelectorAll("[data-theme-label]");
+        const gradientTextEls = document.querySelectorAll("[data-theme-gradient-text]");
+        const gradientBgEls = document.querySelectorAll("[data-theme-gradient-bg]");
+        const accentTextEls = document.querySelectorAll("[data-theme-accent-text]");
+        const prevBtn = document.querySelector("#deck-global-chrome [data-deck-prev]");
+        const nextBtn = document.querySelector("#deck-global-chrome [data-deck-next]");
+        const total = slides.length;
+        if (!main || !total) return;
+
+        let current = 0;
+        let currentTheme = 0;
+        const themes = [
+          {
+            name: "OCEAN",
+            desc: "浅蓝青 · 玻璃主卡",
+            bodyGradient: "linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 52%, #cffafe 100%)",
+            accent: "#0369a1",
+            navBorder: "rgba(186, 230, 253, 0.95)",
+            navBg: "rgba(224, 242, 254, 0.85)",
+            navText: "#0c4a6e",
+            gradient: "linear-gradient(90deg, #0ea5e9, #22d3ee)",
+            buttonShadow: "rgba(14, 165, 233, 0.35)"
+          },
+          {
+            name: "SUNSET",
+            desc: "橙粉暖调 · 活力路演",
+            bodyGradient: "linear-gradient(135deg, #fff7ed 0%, #ffe4e6 55%, #ffedd5 100%)",
+            accent: "#c2410c",
+            navBorder: "rgba(254, 215, 170, 0.95)",
+            navBg: "rgba(255, 237, 213, 0.9)",
+            navText: "#9a3412",
+            gradient: "linear-gradient(90deg, #f97316, #f43f5e)",
+            buttonShadow: "rgba(249, 115, 22, 0.35)"
+          },
+          {
+            name: "FOREST",
+            desc: "薄荷青绿 · 清爽教学",
+            bodyGradient: "linear-gradient(135deg, #ecfdf5 0%, #dcfce7 50%, #d1fae5 100%)",
+            accent: "#0f766e",
+            navBorder: "rgba(167, 243, 208, 0.95)",
+            navBg: "rgba(209, 250, 229, 0.9)",
+            navText: "#065f46",
+            gradient: "linear-gradient(90deg, #10b981, #14b8a6)",
+            buttonShadow: "rgba(16, 185, 129, 0.35)"
+          },
+          {
+            name: "GRAPE",
+            desc: "蓝紫渐变 · 科技感",
+            bodyGradient: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 52%, #dbeafe 100%)",
+            accent: "#6d28d9",
+            navBorder: "rgba(221, 214, 254, 0.95)",
+            navBg: "rgba(237, 233, 254, 0.9)",
+            navText: "#5b21b6",
+            gradient: "linear-gradient(90deg, #8b5cf6, #3b82f6)",
+            buttonShadow: "rgba(99, 102, 241, 0.35)"
+          }
+        ];
+
+        function applyTheme(theme) {
+          document.body.style.backgroundImage = theme.bodyGradient;
+          document.body.style.backgroundColor = "#f8fafc";
+          document.documentElement.style.setProperty("--theme-gradient", theme.gradient);
+          if (progressText) progressText.style.color = theme.accent;
+          if (styleText) styleText.textContent = theme.name + " " + theme.desc;
+          themeLabelEls.forEach(function (el) {
+            el.textContent = theme.name;
+          });
+          gradientTextEls.forEach(function (el) {
+            el.style.backgroundImage = theme.gradient;
+          });
+          gradientBgEls.forEach(function (el) {
+            el.style.backgroundImage = theme.gradient;
+            el.style.borderColor = "transparent";
+            if (el.tagName === "BUTTON" || el.tagName === "DIV") {
+              el.style.boxShadow = "0 10px 25px -12px " + theme.buttonShadow;
+            }
+          });
+          accentTextEls.forEach(function (el) {
+            el.style.color = theme.accent;
+          });
+          if (themeToggleBtn) {
+            themeToggleBtn.setAttribute("aria-label", "切换颜色风格，当前 " + theme.name);
+            themeToggleBtn.setAttribute("title", "切换颜色风格（当前 " + theme.name + "）");
+          }
+        }
+
+        function refreshReveal(activeSection) {
+          document.querySelectorAll(".reveal").forEach(function (el) {
+            el.classList.remove("in");
+          });
+          if (!activeSection) return;
+          activeSection.querySelectorAll(".reveal").forEach(function (el) {
+            el.classList.add("in");
+          });
+        }
+
+        function isFullscreen() {
+          return !!document.fullscreenElement;
+        }
+
+        function updateFullscreenButton() {
+          if (!fullscreenBtn) return;
+          var on = isFullscreen();
+          fullscreenBtn.setAttribute("aria-label", on ? "退出全屏" : "进入全屏");
+          fullscreenBtn.setAttribute("title", on ? "退出全屏" : "进入全屏");
+          if (fullscreenEnterIcon) fullscreenEnterIcon.classList.toggle("hidden", on);
+          if (fullscreenExitIcon) fullscreenExitIcon.classList.toggle("hidden", !on);
+        }
+
+        async function toggleFullscreen() {
+          try {
+            if (!isFullscreen()) {
+              await document.documentElement.requestFullscreen();
+            } else {
+              await document.exitFullscreen();
+            }
+          } catch (err) {
+            // Ignore permission/cancel errors and keep UI state in sync.
+          } finally {
+            updateFullscreenButton();
+          }
+        }
+
+        function updateNavButtons() {
+          if (prevBtn) prevBtn.disabled = current <= 0;
+          if (nextBtn) nextBtn.disabled = current >= total - 1;
+        }
+
+        function show(index, options) {
+          var opts = options || {};
+          var immediate = !!opts.immediate;
+          if (index < 0) index = 0;
+          if (index >= total) index = total - 1;
+          var from = current;
+          var direction = index > from ? 1 : -1;
+          current = index;
+          var activeEl = slides[current];
+          var prevEl = slides[from];
+          slides.forEach(function (el) {
+            el.classList.remove("slide-active", "slide-enter-left", "slide-enter-right");
+            el.style.opacity = "1";
+          });
+          slides.forEach(function (el, j) {
+            var isActive = j === current;
+            if (isActive) {
+              el.classList.remove("hidden", "z-0");
+              el.classList.add("flex", "z-10");
+              el.setAttribute("aria-hidden", "false");
+            } else {
+              el.classList.add("hidden", "z-0");
+              el.classList.remove("flex", "z-10", "z-20");
+              el.setAttribute("aria-hidden", "true");
+            }
+          });
+          if (!immediate && prevEl && prevEl !== activeEl) {
+            activeEl.classList.add(direction > 0 ? "slide-enter-right" : "slide-enter-left");
+            activeEl.classList.add("slide-active");
+            setTimeout(function () {
+              activeEl.classList.remove("slide-enter-right", "slide-enter-left");
+            }, 340);
+          } else {
+            activeEl.classList.add("slide-active");
+          }
+          navItems.forEach(function (el, i) {
+            var on = i === current;
+            var theme = themes[currentTheme];
+            if (on) {
+              el.style.borderColor = theme.navBorder;
+              el.style.backgroundColor = theme.navBg;
+              el.style.color = theme.navText;
+              el.style.boxShadow = "0 10px 24px -16px " + theme.buttonShadow;
+              el.style.transform = "translateY(-1px) scale(1.01)";
+            } else {
+              el.style.borderColor = "transparent";
+              el.style.backgroundColor = "";
+              el.style.color = "";
+              el.style.boxShadow = "";
+              el.style.transform = "";
+            }
+            if (on) el.setAttribute("aria-current", "true");
+            else el.removeAttribute("aria-current");
+          });
+          if (navScroll) {
+            var activeNav = Array.prototype.find.call(navItems, function (item) {
+              return parseInt(item.getAttribute("data-deck-index"), 10) === current;
+            });
+            if (activeNav) {
+              var navRect = navScroll.getBoundingClientRect();
+              var itemRect = activeNav.getBoundingClientRect();
+              var delta = itemRect.top - navRect.top;
+              var targetTop = navScroll.scrollTop + delta - (navScroll.clientHeight - activeNav.offsetHeight) / 2;
+              var maxTop = Math.max(0, navScroll.scrollHeight - navScroll.clientHeight);
+              var nextTop = Math.min(maxTop, Math.max(0, targetTop));
+              navScroll.scrollTo({ top: nextTop, behavior: immediate ? "auto" : "smooth" });
+            }
+          }
+          if (progressText) progressText.textContent = current + 1 + "/" + total;
+          if (progressBar) progressBar.style.width = (100 * (current + 1)) / total + "%";
+          if (activeEl) {
+            activeEl.scrollTop = 0;
+            refreshReveal(activeEl);
+          }
+          updateNavButtons();
+        }
+
+        function go(delta) {
+          show(current + delta);
+        }
+
+        main.addEventListener("click", function (e) {
+          var t = e.target;
+          if (t.closest("[data-deck-prev]")) {
+            e.preventDefault();
+            go(-1);
+            return;
+          }
+          if (t.closest("[data-deck-next]")) {
+            e.preventDefault();
+            go(1);
+            return;
+          }
+          var gotoBtn = t.closest("[data-deck-goto]");
+          if (gotoBtn) {
+            e.preventDefault();
+            var idx = parseInt(gotoBtn.getAttribute("data-deck-goto"), 10);
+            if (!isNaN(idx)) show(idx);
+            return;
+          }
+        });
+
+        navItems.forEach(function (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            link.classList.remove("nav-click-pop");
+            void link.offsetWidth;
+            link.classList.add("nav-click-pop");
+            var idx = parseInt(link.getAttribute("data-deck-index"), 10);
+            if (!isNaN(idx)) show(idx);
+            setTimeout(function () {
+              link.classList.remove("nav-click-pop");
+            }, 360);
+          });
+        });
+
+        if (themeToggleBtn) {
+          themeToggleBtn.addEventListener("click", function () {
+            currentTheme = (currentTheme + 1) % themes.length;
+            applyTheme(themes[currentTheme]);
+            show(current);
+          });
+        }
+
+        if (fullscreenBtn) {
+          fullscreenBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            toggleFullscreen();
+          });
+          document.addEventListener("fullscreenchange", updateFullscreenButton);
+          updateFullscreenButton();
+        }
+
+        document.addEventListener("keydown", function (e) {
+          var t = e.target;
+          if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+          if (e.key === "ArrowLeft" || e.key === "PageUp") {
+            e.preventDefault();
+            go(-1);
+          } else if (e.key === "ArrowRight" || e.key === "PageDown") {
+            e.preventDefault();
+            go(1);
+          }
+        });
+
+        applyTheme(themes[currentTheme]);
+        show(0, { immediate: true });
+      })();
+    </script>
+  </body>
+</html>
